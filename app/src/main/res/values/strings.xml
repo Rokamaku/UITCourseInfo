@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">UITCourseInfo</string>
+    <string name="title_activity_login">Sign in UIT account</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">Student ID</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_coursecode">Course code( STAT4033.H11.CTTT, CS4323.H11.CTTT)</string>
+    <string name="action_sign_in">OK</string>
+    <string name="title_activity_login1">Sign in</string>
+    <string name="error_not_fill_msg">All fields are required</string>
+    <string name="error_no_course_code">No course code found</string>
+    <string name="error_invalid_acc_or_course_code">Invalid account or no course code match with your account</string>
+    <string name="error_connection">Connection error!</string>
+
+    <string name="shared_prefence_user">UserName</string>
+    <string name="shared_prefence_pass">PassWord</string>
+    <string name="shared_prefence_course">CourseTitle</string>
+
+    <string name="Course_pos">h3[class=coursename]</string>
+    <string name="News_pos">li[class=post]</string>
+    <string name="Ass_pos">div[class=event]</string>
+    <string name="Res_pos">li[class=activity resource modtype_resource ]</string>
+    <string name="Notifi_pos">div[id=block-views-thongbao-baonghi-baobu-block]</string>
+    <string name="NotifiRoom_pos">div[id=block-views-thongbao-baonghi-baobu-block-1]</string>
+
+    <string name="daa_noti_common_eprs">Thông báo</string>
+    <string name="daa_link">https://daa.uit.edu.vn</string>
+</resources>
