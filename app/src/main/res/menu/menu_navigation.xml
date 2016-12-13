@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item android:title="Daa Notification"
+        android:id="@+id/Daa_item"
+        app:showAsAction="always"
+        android:visible="true"
+        android:icon="@mipmap/news_ico"
+        android:checkable="false"
+        android:enabled="true" />
+    <item android:title="Forum Notification"
+        android:id="@+id/Forum_item"
+        app:showAsAction="always"
+        android:icon="@mipmap/forum_ico"
+        android:visible="true"
+        android:checkable="false"
+        android:enabled="true" />
+    <item android:title="Assignments"
+        android:id="@+id/Ass_item"
+        app:showAsAction="always"
+        android:visible="true"
+        android:icon="@mipmap/ass_ico"
+        android:checkable="false"
+        android:enabled="true" />
+    <item android:title="Resource"
+        android:id="@+id/Resource_item"
+        app:showAsAction="always"
+        android:visible="true"
+        android:icon="@mipmap/res_ico"
+        android:checkable="false"
+        android:enabled="true" />
+    <item android:title="Sign out"
+        android:id="@+id/signout_item"
+        app:showAsAction="always"
+        android:visible="true"
+        android:icon="@mipmap/signout_ico"
+        android:checkable="false"
+        android:enabled="true" />
+    <item android:title="Exit"
+        android:id="@+id/Exit_Item"
+        android:showAsAction="always"
+        android:visible="true"
+        android:enabled="true"
+        android:icon="@mipmap/quit_ico" />
+</menu>

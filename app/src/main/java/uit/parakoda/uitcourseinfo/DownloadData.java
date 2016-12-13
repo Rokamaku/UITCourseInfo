@@ -1,8 +1,12 @@
 package uit.parakoda.uitcourseinfo;
 
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
+import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
 
 import org.jsoup.nodes.Document;
@@ -30,6 +34,7 @@ class InfoWraper {
     public String[] getCourseCode() { return courseCode; }
 }
 
+
 class InfoCourseWraper {
     private String userName;
     private String passWord;
@@ -48,14 +53,18 @@ class InfoCourseWraper {
     }
 }
 
-class DownloadCourseName extends AsyncTask<InfoWraper, Void, ArrayList<Course> > {
+
+class AsyncTaskDownloadCourseName extends AsyncTask<InfoWraper, Void, ArrayList<Course> > {
     ProgressDialog progDailog;
+    public AsyncTaskDownloadCourseName(Context context) {
+        progDailog = new ProgressDialog(context);
+    }
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         progDailog = new ProgressDialog(LoginActivity.getContext());
         progDailog.setMessage("Loading...");
-        progDailog.setIndeterminate(false);
+        progDailog.setIndeterminate(true);
         progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDailog.setCancelable(true);
         progDailog.show();
@@ -68,7 +77,7 @@ class DownloadCourseName extends AsyncTask<InfoWraper, Void, ArrayList<Course> >
             HTMLFile.getAuthentication();
             HTMLCourse = HTMLFile.getDoc();
         } catch (IOException e) {
-            Toast.makeText(LoginActivity.getContext(), "Connection error", Toast.LENGTH_SHORT);
+           return null;
         }
         ArrayList<Course> courses = CourseParser.getCourseInfo(HTMLCourse,
                 params[0].getCourseCode());
@@ -82,17 +91,22 @@ class DownloadCourseName extends AsyncTask<InfoWraper, Void, ArrayList<Course> >
 
 }
 
-class DownloadCourseInfo extends AsyncTask<InfoCourseWraper, Void, ArrayList<CourseInfo>> {
-    ProgressDialog progDailog;
+
+class AsyncTaskDownloadCourseInfo extends AsyncTask<InfoCourseWraper, Void, ArrayList<CourseInfo>> {
+    private ProgressDialog progDailog;
+    public AsyncTaskDownloadCourseInfo(Context context) {
+        progDailog = new ProgressDialog(context);
+    }
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progDailog = new ProgressDialog(MainActivity.getContext());
-        progDailog.setMessage("Loading...");
-        progDailog.setIndeterminate(false);
+        progDailog.setTitle("Loading...");
+        progDailog.setMessage("Please wait...");
+        progDailog.setIndeterminate(true);
         progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progDailog.setCancelable(true);
+        progDailog.setCancelable(false);
         progDailog.show();
+
     }
 
     @Override
@@ -118,8 +132,6 @@ class DownloadCourseInfo extends AsyncTask<InfoCourseWraper, Void, ArrayList<Cou
                 listCourseDetail.add(aCourseDetail);
             }
         } catch (IOException e) {
-            Toast.makeText(MainActivity.getContext(), MainActivity.getContext()
-                    .getString(R.string.error_connection), Toast.LENGTH_SHORT);
             return null;
         }
         return listCourseDetail;
@@ -131,3 +143,4 @@ class DownloadCourseInfo extends AsyncTask<InfoCourseWraper, Void, ArrayList<Cou
         progDailog.dismiss();
     }
 }
+

@@ -26,10 +26,8 @@ class CourseParser {
         ArrayList<Course> Courses = new ArrayList<Course>();
         Elements courseName = doc.select(LoginActivity.getContext().getString(R.string.Course_pos));
         for (int i = 0; i < CoursesCode.length; i++) {
-            boolean isExist = false;
             for( Element ele : courseName) {
                 if (ele.text().contains(CoursesCode[i])) {
-                    isExist = true;
                     Course aCourse = new Course();
                     aCourse.setTitle(ele.text());
                     aCourse.setLink(ele.child(0).attr("href"));
@@ -38,8 +36,6 @@ class CourseParser {
                     break;
                 }
             }
-            if (!isExist)
-                Toast.makeText(LoginActivity.getContext(), CoursesCode[i] + "not exists" , Toast.LENGTH_SHORT);
         }
         return Courses;
     }
@@ -59,9 +55,10 @@ class CourseParser {
         Elements listNotifi = listContent.get(0).child(0).children();
         for (int i = 0; i < CourseCode.length; i++) {
             for (Element aNotifi : listNotifi) {
-                if (aNotifi.child(1).text().contains(CourseCode[i])) {
+                if (aNotifi.text().contains(CourseCode[i])) {
                     DaaNotifi aNotification = new DaaNotifi();
                     aNotification.setTitle(aNotifi.text());
+                    aNotification.setPublishDate(aNotifi.child(2).text());
                     aNotification.setLink(MainActivity.getContext()
                             .getString(R.string.daa_link) + aNotifi.child(1).attr("href"));
                     BlockNotifi.add(aNotification);

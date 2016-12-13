@@ -1,7 +1,11 @@
 package uit.parakoda.uitcourseinfo;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.Toast;
 
+import org.apache.http.params.HttpParams;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,11 +43,19 @@ class HTMLGetter {
         this.urlPage = urlPage;
     }
 
+    public static boolean haveNetworkConnection(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     public Document getDoc() throws IOException {
         Connection.Response course = Jsoup.connect(urlPage)
                 .followRedirects(true)
                 .userAgent(USER_AGENT)
                 .method(Connection.Method.GET)
+                .timeout(1000*5)
                 .execute();
         Document doc = course.parse();
         return doc;
@@ -77,6 +89,7 @@ class HTMLAuthGetter extends HTMLGetter {
                 .header("Connection", "Keep-alive")
                 .userAgent(USER_AGENT)
                 .method(Connection.Method.GET)
+                .timeout(1000*5)
                 .execute();
         Connection.Response getAuth = Jsoup.connect(urlLogin)
                 .followRedirects(true)
@@ -85,6 +98,7 @@ class HTMLAuthGetter extends HTMLGetter {
                 .data("username", userName)
                 .data("password", passWord)
                 .referrer(urlPage)
+                .timeout(1000*5)
                 .execute();
         Cookies = getAuth.cookies();
     }
@@ -96,6 +110,7 @@ class HTMLAuthGetter extends HTMLGetter {
                 .cookies(Cookies)
                 .userAgent(USER_AGENT)
                 .method(Connection.Method.GET)
+                .timeout(1000*5)
                 .execute();
         Document doc = course.parse();
         return doc;

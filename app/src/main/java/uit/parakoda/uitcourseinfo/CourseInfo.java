@@ -65,6 +65,7 @@ class Assignment extends BasicInfo {
     public String getTimeofDeadline() {
         return TimeofDeadline;
     }
+    public String getRemainingTime() { return null; }
     public void setTimeofDeadline(String TimeofDeadline) {
         this.TimeofDeadline = TimeofDeadline;
     }
@@ -76,7 +77,9 @@ class Resource extends BasicInfo {
 }
 
 class DaaNotifi extends BasicInfo {
-
+    private String PublishDate;
+    public String getPublishDate() { return PublishDate; }
+    public void setPublishDate(String PublishDate) { this.PublishDate = PublishDate; }
 }
 
 

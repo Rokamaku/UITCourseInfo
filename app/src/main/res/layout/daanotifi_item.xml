@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackgroundItem">
+
+    <LinearLayout android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:background="@mipmap/news_ico"
+        android:layout_marginRight="5dip">
+
+        <ImageView
+            android:id="@+id/list_image"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_margin="25dip" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/TextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textSize="25dip"
+        android:text="Title"
+        android:textColor="@color/md_teal_900"
+        android:typeface="sans"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:text="Publish Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#343434"
+        android:textSize="15dip"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_below="@id/TextViewTitle"
+        android:id="@+id/TextViewPublicDate" />
+
+
+    <ImageView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/forward_ico"
+        android:id="@+id/BtnBrowse" />
+
+</RelativeLayout>

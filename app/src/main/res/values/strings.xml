@@ -1,18 +1,20 @@
 <resources>
-    <string name="app_name">UITCourseInfo</string>
+    <string name="app_name">UIT Course Info</string>
     <string name="title_activity_login">Sign in UIT account</string>
 
     <!-- Strings related to login -->
     <string name="prompt_username">Student ID</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_coursecode">Course code( STAT4033.H11.CTTT, CS4323.H11.CTTT)</string>
-    <string name="action_sign_in">OK</string>
+    <string name="action_sign_in"><u><b>Let me in</b></u></string>
     <string name="title_activity_login1">Sign in</string>
     <string name="error_not_fill_msg">All fields are required</string>
     <string name="error_no_course_code">No course code found</string>
     <string name="error_invalid_acc_or_course_code">Invalid account or no course code match with your account</string>
     <string name="error_connection">Connection error!</string>
+    <string name="error_no_network">You need to open network connection!</string>
 
+    <string name="shared_prefence_name">AccInfo</string>
     <string name="shared_prefence_user">UserName</string>
     <string name="shared_prefence_pass">PassWord</string>
     <string name="shared_prefence_course">CourseTitle</string>
@@ -26,4 +28,8 @@
 
     <string name="daa_noti_common_eprs">Thông báo</string>
     <string name="daa_link">https://daa.uit.edu.vn</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>

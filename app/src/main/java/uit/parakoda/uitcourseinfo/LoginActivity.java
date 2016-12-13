@@ -23,6 +23,9 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -38,20 +41,24 @@ import com.google.gson.Gson;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity extends AppCompatActivity{
 
-    private static Context context;
+    private static Context mContext;
     private EditText EditTextUser;
     private EditText EditTextPass;
     private EditText EditTextCourseCode;
     private Button BtnSignIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +68,11 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 CheckValidInfo(v);
-
             }
         });
 
     }
+
 
     private void FindViewByID() {
         EditTextUser = (EditText)findViewById(R.id.EditTextUserName);
@@ -77,14 +84,20 @@ public class LoginActivity extends AppCompatActivity{
     private String[] parseCourseCode() {
         String CourseCode = EditTextCourseCode.getText().toString();
         String[] tokens = CourseCode.split(",");
+        Set<String> setCourse = new HashSet<String>();
         for (int i = 0; i < tokens.length; i++) {
-            tokens[i] = tokens[i].replaceAll("\\s+","");
+            setCourse.add(tokens[i].replaceAll("\\s+",""));
         }
-        return tokens;
+        String[] courseCode = new String[setCourse.size()];
+        int i = 0;
+        for (String acourse : setCourse) {
+            courseCode[i++] = acourse;
+        }
+        return courseCode;
     }
 
     public static Context getContext() {
-        return context;
+        return mContext;
     }
 
     private void CheckValidInfo(View v) {
@@ -97,40 +110,40 @@ public class LoginActivity extends AppCompatActivity{
             String userName = EditTextUser.getText().toString();
             String passWord = EditTextPass.getText().toString();
             String[] CourseCode = parseCourseCode();
-            if (CourseCode.length == 0) {
-                Toast.makeText(v.getContext(),
-                        R.string.error_no_course_code, Toast.LENGTH_SHORT).show();
-            }
-            else {
-                CheckvalidAccountOnline(v, userName, passWord, CourseCode);
-            }
+            CheckvalidAccountOnline(v, userName, passWord, CourseCode);
         }
     }
 
     private void CheckvalidAccountOnline (View v, String userName, String passWord, String[] CourseCode) {
         try {
-            InfoWraper wrapInfo = new InfoWraper(userName, passWord, CourseCode);
-            context = LoginActivity.this;
-            ArrayList<Course> courses = new DownloadCourseName().execute(wrapInfo).get();
-            if (courses.size() == 0) {
-                Toast.makeText(v.getContext(),
-                        R.string.error_invalid_acc_or_course_code, Toast.LENGTH_SHORT).show();
-            }
-            else {
-                SaveSharePrenfes(v, userName, passWord, courses);
-                Intent callMain = new Intent(this, MainActivity.class);
-                startActivity(callMain);
-
+            if (HTMLGetter.haveNetworkConnection(LoginActivity.this)) {
+                InfoWraper wrapInfo = new InfoWraper(userName, passWord, CourseCode);
+                mContext = LoginActivity.this;
+                ArrayList<Course> courses = new AsyncTaskDownloadCourseName(LoginActivity.this).execute(wrapInfo).get();
+                if (courses.size() == 0) {
+                    Toast.makeText(v.getContext(),
+                            R.string.error_invalid_acc_or_course_code, Toast.LENGTH_SHORT).show();
+                } else if (courses == null) {
+                    Toast.makeText(LoginActivity.this, getString(R.string.error_connection), Toast.LENGTH_LONG);
+                } else {
+                    SaveSharePrenfes(v, userName, passWord, courses);
+                    Intent callMain = new Intent(this, MainActivity.class);
+                    startActivity(callMain);
+                }
+            } else {
+                Toast.makeText(LoginActivity.this, getString(R.string.error_no_network), Toast.LENGTH_LONG).show();
             }
 
         } catch (Exception e) {
             Toast.makeText(v.getContext(), e.getMessage(),
                     Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void SaveSharePrenfes(View v, String userName, String passWord, ArrayList<Course> courses) {
-        SharedPreferences accInfo = v.getContext().getSharedPreferences("AccInfo", Context.MODE_PRIVATE);
+        SharedPreferences accInfo = v.getContext().getSharedPreferences(
+                getString(R.string.shared_prefence_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = accInfo.edit();
         editor.putString(getString(R.string.shared_prefence_user), userName);
         editor.putString(getString(R.string.shared_prefence_pass), passWord);
@@ -139,6 +152,8 @@ public class LoginActivity extends AppCompatActivity{
         editor.putString(getString(R.string.shared_prefence_course), json);
         editor.commit();
     }
+
+
 
 }
 

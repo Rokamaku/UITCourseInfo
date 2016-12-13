@@ -1,24 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:fitsSystemWindows="true"
     tools:context="uit.parakoda.uitcourseinfo.MainActivity">
 
-    <android.support.v7.widget.Toolbar
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#A2D9F7"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:minHeight="?attr/actionBarSize"
-        android:id="@+id/ToolBarShow"
-        app:logo="@mipmap/logo_uit"
-        tools:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        style="@style/Base.TextAppearance.AppCompat.Title" />
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:background="@color/md_cyan_50"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:id="@+id/listViewShow"
+            style="@style/Widget.AppCompat.ListView"
+            android:background="@color/md_cyan_50" >
+        </ListView>
+
+        <TextView
+            android:text="There is nothing to show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            style="@android:style/Widget.TextView"
+            android:textColor="?attr/editTextColor"
+            android:visibility="gone"
+            android:id="@+id/TextView_Empty" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_height="match_parent"
+        android:id="@+id/nav_menu"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_navigation"
+        android:layout_width="320dp"
+        android:background="#FFFFFF"
+        app:itemIconTint="@color/menu_nav_item_selector"
+        app:itemTextColor="@color/menu_nav_item_selector"
+        app:itemBackground="@drawable/nav_view_item_background"
+        app:itemTextAppearance="@style/menutextappearance"
+        tools:itemTextColor="@color/md_cyan_700"
+        android:clickable="true">
+    </android.support.design.widget.NavigationView>
+
+
+
+</android.support.v4.widget.DrawerLayout>
