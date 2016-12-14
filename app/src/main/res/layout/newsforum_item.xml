@@ -8,9 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="3dip"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:background="@mipmap/forum_ico"
-        android:layout_marginRight="5dip">
+        android:layout_marginEnd="5dip">
 
         <ImageView
             android:id="@+id/list_image"
@@ -24,11 +24,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
-        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_toEndOf="@+id/thumbnail"
         android:text="Title"
         android:textColor="@color/md_teal_900"
         android:typeface="sans"
-        android:textSize="20dip"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:paddingTop="5dp" />
 
@@ -38,24 +38,24 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/TextViewTitle"
         android:textColor="#343434"
-        android:textSize="15dip"
+        android:textSize="15sp"
         android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_toEndOf="@+id/thumbnail"
         android:text="Author" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dip"
+        android:textSize="15sp"
         android:textColor="#343434"
-        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_toEndOf="@+id/thumbnail"
         android:layout_below="@id/TextViewAuthor"
         android:id="@+id/TextViewDate" />
 
     <ImageView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:background="@mipmap/forward_ico"
         android:id="@+id/BtnBrowse" />

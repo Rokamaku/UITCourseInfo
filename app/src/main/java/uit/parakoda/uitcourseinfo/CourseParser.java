@@ -18,10 +18,12 @@ class CourseParser {
 
     private Document doc;
     private static String[] CourseCode;
+
     public static void setCourseCode(String[] CourseCode) { CourseParser.CourseCode = CourseCode; }
     public CourseParser(Document doc) {
         this.doc = doc;
     }
+
     public static ArrayList<Course> getCourseInfo(Document doc, String[] CoursesCode) {
         ArrayList<Course> Courses = new ArrayList<Course>();
         Elements courseName = doc.select(LoginActivity.getContext().getString(R.string.Course_pos));
@@ -91,6 +93,7 @@ class CourseParser {
         for (Element ele : AssignmentPost) {
             Assignment ass = new Assignment();
             ass.setTitle(ele.child(1).text());
+            ass.setLink(ele.child(1).attr("href"));
             ass.setTimeofDeadline(ele.child(2).text());
             Assignments.add(ass);
         }

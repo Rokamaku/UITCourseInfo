@@ -40,6 +40,8 @@ import java.util.concurrent.ExecutionException;
 import static android.support.v4.view.MenuItemCompat.getActionView;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String MESSAGE_BROWSE = "Link_Browse";
+
     private static Context context;
     private String username;
     private String password;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView mNavView;
     private Spinner mSpinner_nav;
     private SharedPreferences accInfo;
+    private boolean flagend = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (coursesDetail == null)
             return false;
         getMenuInflater().inflate(R.menu.activity_main_actionsbar, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         CourseParser.setCourseCode(courseCode);
         context = MainActivity.this;
         try {
-            coursesDetail = new AsyncTaskDownloadCourseInfo(MainActivity.this).execute(wraper).get();
+            coursesDetail = new AsyncTaskDownloadCourseInfo().execute(wraper).get();
             if (coursesDetail == null) {
                 Toast.makeText(MainActivity.this, getString(R.string
                         .error_connection), Toast.LENGTH_LONG).show();

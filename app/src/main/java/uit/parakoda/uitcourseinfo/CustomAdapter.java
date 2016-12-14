@@ -43,6 +43,12 @@ abstract class CustomAdapter extends ArrayAdapter<BasicInfo> {
         return setView(view, position);
     }
 
+    protected void callBrowseActivity(BasicInfo anItem) {
+        Intent intentBrowse = new Intent(mContext, BrowserActivity.class);
+        intentBrowse.putExtra(MainActivity.MESSAGE_BROWSE, anItem.getLink());
+        mContext.startActivity(intentBrowse);
+    }
+
     abstract protected View setView(View view, int position);
 }
 
@@ -71,9 +77,7 @@ class NewsForumAdapter extends CustomAdapter {
         btnLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intenBrowse = new Intent(Intent.ACTION_VIEW);
-                intenBrowse.setData(Uri.parse(ANEWS.getLink()));
-                mContext.startActivity(intenBrowse);
+                callBrowseActivity(ANEWS);
             }
         });
         return view;
@@ -106,9 +110,7 @@ class AssignmentAdapter extends CustomAdapter {
         btnLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intenBrowse = new Intent(Intent.ACTION_VIEW);
-                intenBrowse.setData(Uri.parse(AAss.getLink()));
-                mContext.startActivity(intenBrowse);
+                callBrowseActivity(AAss);
             }
         });
         return view;
@@ -170,9 +172,10 @@ class DaaNotifiAdapter extends CustomAdapter {
         btnLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intenBrowse = new Intent(Intent.ACTION_VIEW);
+                /*Intent intenBrowse = new Intent(Intent.ACTION_VIEW);
                 intenBrowse.setData(Uri.parse(ARes.getLink()));
-                mContext.startActivity(intenBrowse);
+                mContext.startActivity(intenBrowse);*/
+                callBrowseActivity(ARes);
             }
         });
         return view;
@@ -200,7 +203,7 @@ class CustomSpinnerAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return getCustomView(position, convertView, parent);
+        return getCustomViewDropdown(position, convertView, parent);
     }
 
     @Override
@@ -215,7 +218,21 @@ class CustomSpinnerAdapter extends ArrayAdapter<String> {
 
         TextView tvCategory = (TextView) row.findViewById(R.id.tvCategory);
 
-        tvCategory.setText(data.get(position).toString());
+        if (data.get(position).length() <= 40)
+            tvCategory.setText(data.get(position));
+        else
+            tvCategory.setText(data.get(position).substring(0,40) + "...");
+
+        return row;
+    }
+
+    public View getCustomViewDropdown(int position, View convertView, ViewGroup parent) {
+
+        View row = inflater.inflate(layoutId, parent, false);
+
+        TextView tvCategory = (TextView) row.findViewById(R.id.tvCategory);
+
+        tvCategory.setText(data.get(position));
 
         return row;
     }

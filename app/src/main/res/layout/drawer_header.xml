@@ -14,6 +14,6 @@
         android:layout_height="wrap_content"
         android:text="Username"
         android:textColor="@color/md_teal_800"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 </LinearLayout>

@@ -82,6 +82,8 @@ class HTMLAuthGetter extends HTMLGetter {
         this.passWord = passWord;
     }
 
+    public Map<String, String> getCookies() { return Cookies; }
+
     public void getAuthentication() throws IOException {
 
         Connection.Response Firstreq = Jsoup.connect(urlLogin)

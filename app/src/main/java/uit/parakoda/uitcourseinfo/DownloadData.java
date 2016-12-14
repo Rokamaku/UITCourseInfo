@@ -13,7 +13,9 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.MissingFormatArgumentException;
+import java.util.Objects;
 
 /**
  * Created by parakoda on 12/4/16.
@@ -52,6 +54,7 @@ class InfoCourseWraper {
         return courses;
     }
 }
+
 
 
 class AsyncTaskDownloadCourseName extends AsyncTask<InfoWraper, Void, ArrayList<Course> > {
@@ -93,21 +96,14 @@ class AsyncTaskDownloadCourseName extends AsyncTask<InfoWraper, Void, ArrayList<
 
 
 class AsyncTaskDownloadCourseInfo extends AsyncTask<InfoCourseWraper, Void, ArrayList<CourseInfo>> {
-    private ProgressDialog progDailog;
-    public AsyncTaskDownloadCourseInfo(Context context) {
-        progDailog = new ProgressDialog(context);
+    public AsyncTaskDownloadCourseInfo() {
     }
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progDailog.setTitle("Loading...");
-        progDailog.setMessage("Please wait...");
-        progDailog.setIndeterminate(true);
-        progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progDailog.setCancelable(false);
-        progDailog.show();
 
     }
+
 
     @Override
     protected ArrayList<CourseInfo> doInBackground(InfoCourseWraper... params) {
@@ -140,7 +136,22 @@ class AsyncTaskDownloadCourseInfo extends AsyncTask<InfoCourseWraper, Void, Arra
     @Override
     protected void onPostExecute(ArrayList<CourseInfo> params) {
         super.onPostExecute(params);
-        progDailog.dismiss();
+
+    }
+
+}
+
+
+class AsyncTaskGetAuth extends AsyncTask<String, Void, Map<String, String>> {
+    @Override
+    protected Map<String, String> doInBackground(String... params) {
+        HTMLAuthGetter getAuth = new HTMLAuthGetter(params[0], params[1]);
+        try {
+            getAuth.getAuthentication();
+        } catch (IOException e) {
+            return null;
+        }
+        return getAuth.getCookies();
     }
 }
 

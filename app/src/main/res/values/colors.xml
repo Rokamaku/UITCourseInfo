@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#3498DB</color>
 
@@ -29,7 +29,7 @@
     <color name="md_cyan_A100">#84ffff</color>
     <color name="md_cyan_A200">#18FFFF</color>
     <color name="md_cyan_A400">#00E5FF</color>
-    <color name="md_cyan_A700">#00B8D4</color>
+    <color name="md_cyan_A700">#00b8d4</color>
 
 
     <!-- TEAL -->
@@ -48,7 +48,7 @@
     <color name="md_teal_900">#004d40</color>
 
     <!-- light -->
-    <color name="md_teal_A100">#A7FFEB</color>
+    <color name="md_teal_A100">#a7ffeb</color>
     <color name="md_teal_A200">#64FFDA</color>
     <color name="md_teal_A400">#1de9b6</color>
     <color name="md_teal_A700">#00bfa5</color>

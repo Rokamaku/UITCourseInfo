@@ -10,7 +10,7 @@
 
     <style name="menutextappearance">
         <item name="android:textColor">#fff</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
 </resources>

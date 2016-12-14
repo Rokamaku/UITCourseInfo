@@ -8,9 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="3dip"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:background="@mipmap/ass_ico"
-        android:layout_marginRight="5dip">
+        android:layout_marginEnd="5dip">
 
         <ImageView
             android:id="@+id/list_image"
@@ -24,8 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
-        android:layout_toRightOf="@+id/thumbnail"
-        android:textSize="20dip"
+        android:layout_toEndOf="@+id/thumbnail"
+        android:textSize="18sp"
         android:text="Title"
         android:textColor="@color/md_cyan_900"
         android:typeface="sans"
@@ -38,8 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/TextViewTitle"
         android:textColor="#343434"
-        android:textSize="15dip"
-        android:layout_toRightOf="@+id/thumbnail"
+        android:textSize="15sp"
+        android:layout_toEndOf="@+id/thumbnail"
         android:text="Date of Deadline" />
 
 
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#343434"
-        android:textSize="20dip"
+        android:textSize="20sp"
         android:layout_toRightOf="@+id/thumbnail"
         android:layout_below="@id/TextViewAuthor"
         android:id="@+id/TextViewRemainTime" />

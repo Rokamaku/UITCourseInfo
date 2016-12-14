@@ -28,6 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -52,7 +53,6 @@ import java.util.logging.LogRecord;
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity extends AppCompatActivity{
-
     private static Context mContext;
     private EditText EditTextUser;
     private EditText EditTextPass;
@@ -91,14 +91,12 @@ public class LoginActivity extends AppCompatActivity{
         String[] courseCode = new String[setCourse.size()];
         int i = 0;
         for (String acourse : setCourse) {
-            courseCode[i++] = acourse;
+            courseCode[i++] = acourse.toUpperCase();
         }
         return courseCode;
     }
 
-    public static Context getContext() {
-        return mContext;
-    }
+    public static Context getContext() { return mContext; }
 
     private void CheckValidInfo(View v) {
         if (EditTextUser.getText().length() == 0 ||
