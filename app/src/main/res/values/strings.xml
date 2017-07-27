@@ -6,7 +6,7 @@
     <string name="prompt_username">Student ID</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_coursecode">Course code( STAT4033.H11.CTTT, CS4323.H11.CTTT)</string>
-    <string name="action_sign_in"><b>Let me in</b></string>
+    <string name="action_sign_in"><b>Sign in</b></string>
     <string name="title_activity_login1">Sign in</string>
     <string name="error_not_fill_msg">All fields are required</string>
     <string name="error_no_course_code">No course code found</string>
